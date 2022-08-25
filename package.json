@@ -1,0 +1,26 @@
+{
+  "name": "ask-it",
+  "private": true,
+  "dependencies": {
+    "@popperjs/core": "^2.11.2",
+    "@rails/actioncable": "^6.0.0",
+    "@rails/activestorage": "^6.0.0",
+    "@rails/ujs": "^6.0.0",
+    "bootstrap": "^5.1.3",
+    "esbuild": "^0.15.5",
+    "jquery": "^3.6.0",
+    "postcss": "^8.4.5",
+    "postcss-cli": "^9.1.0",
+    "sass": "^1.48.0",
+    "tom-select": "^2.0.0",
+    "turbolinks": "^5.2.0"
+  },
+  "version": "0.1.0",
+  "browserslist": [
+    "defaults"
+  ],
+  "scripts": {
+    "build:css": "sass --style compressed ./app/assets/stylesheets/application.bootstrap.scss ./app/assets/builds/application.css --no-source-map --load-path=node_modules", 
+    "build": "esbuild app/javascript/application.js --bundle --outdir=app/assets/builds --public-path=assets" 
+  }
+}

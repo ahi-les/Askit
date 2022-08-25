@@ -1,0 +1,40 @@
+
+<% provide :page_title, @question.title %>
+<% currently_at t('menu.questions') %>
+
+<h1 class="mb-4"><%= @question.title %></h1>
+
+<time datetime="<%= @question.formatted_created_at %>">
+  <%= @question.formatted_created_at %>
+</time>
+
+<div class="lead my-3">
+  <%= sanitize @question.body %>
+</div>
+
+<div class="mb-3">
+  <%= @question.user.gravatar %>
+  <%= @question.user.name_or_email %>
+</div>
+
+<%= render 'comments/commentable', commentable: @question, comment: @comment,
+  html_id: 'questionComments' %>
+
+<div class="border-top border-bottom py-3 mt-3">
+  <div class="btn-group">
+    <%= link_to t('global.button.edit'), edit_question_path(@question), class: 'btn btn-secondary' %>
+    <%= link_to t('global.button.delete'), question_path(@question), class: 'btn btn-danger',
+      data: {method: :delete, confirm: t('global.dialog.you_sure')} %>
+  </div>
+</div>
+
+<h2 class="my-3"><%= t '.write_answer' %></h2>
+
+<%= render 'answers/form' %>
+
+<h2 class="mt-5 mb-3"><%= t '.answers' %></h2>
+
+<%== pagy_bootstrap_nav(@pagy) if @pagy.pages > 1 %>
+<%= render partial: 'answers/answer', collection: @answers,
+  as: :answer, locals: {question: @question} %>
+<%== pagy_bootstrap_nav(@pagy) if @pagy.pages > 1 %>
